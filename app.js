@@ -15,15 +15,10 @@ app.use(cors({
 //解析数据
 const koaBody = require('koa-body');
 app.use(koaBody());
-//静态资源
-const static = require('koa-static')
 // 配置静态资源
-const staticPath = './dist'
-app.use(static(
-  path.join(__dirname, staticPath)
-))
+const serve = require('koa-better-static2');
+app.use(serve('dist', { index: 'index.html' }));
 //路由
 require("./route")(app)
-
 
 app.listen(3001);
